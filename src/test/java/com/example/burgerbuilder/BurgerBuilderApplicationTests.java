@@ -1,10 +1,10 @@
-package com.example.server;
+package com.example.burgerbuilder;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class BurgerBuilderApplicationTests {
 
 	@Test
 	void contextLoads() {
