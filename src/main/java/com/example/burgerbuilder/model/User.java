@@ -1,5 +1,8 @@
 package com.example.burgerbuilder.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,38 +17,54 @@ public class User {
     @Column(columnDefinition = "mail")
     private String mail;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
+    private List<Order> orders = new ArrayList<Order>();
+    
     @Id
-    private Long id;
+    private String id;
 
     public void setName(String newValue) {
-        name = newValue;
+        this.name = newValue;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setSurname(String newValue) {
-        surname = newValue;
+        this.surname = newValue;
     }
 
     public String getSurname() {
-        return surname;
+        return this.surname;
     }
 
     public void setMail(String newValue) {
-        mail = newValue;
+        this.mail = newValue;
     }
 
     public String getMail() {
-        return mail;
+        return this.mail;
+    }
+    
+    public void setOrders(List<Order> newValue) {
+    	this.orders = newValue;
+    }
+    
+    public List<Order> getOrders() {
+    	return this.orders;
     }
 
-    public void setId(Long newValue) {
-        id = newValue;
+    public void setId(String newValue) {
+        this.id = newValue;
     }
 
-    public Long getId() {
-        return id;
+    public String getId() {
+        return this.id;
+    }
+    
+    public void addOrder(Order order) {
+    	this.orders.add(order);
+    	order.setUser(this);
     }
 }

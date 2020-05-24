@@ -1,6 +1,11 @@
 package com.example.burgerbuilder.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "ingredients")
@@ -20,6 +25,10 @@ public class Ingredient {
             initialValue = 1000
     )
     private Long id;
+    
+    @ManyToMany(mappedBy = "ingredients")
+    @JsonIgnore
+    private List<Order> orders = new ArrayList<>();
 
     public void setName(String newValue) {
         name = newValue;
@@ -43,5 +52,13 @@ public class Ingredient {
 
     public Long getId() {
         return id;
+    }
+    
+    public void setOrders(List<Order> newValue) {
+    	this.orders = newValue;
+    }
+    
+    public List<Order> getOrders() {
+    	return this.orders;
     }
 }
