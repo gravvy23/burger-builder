@@ -26,9 +26,12 @@ public class Ingredient {
     )
     private Long id;
     
-    @ManyToMany(mappedBy = "ingredients")
+//    @ManyToMany(mappedBy = "ingredients")
+//    @JsonIgnore
+//    private List<Order> orders = new ArrayList<>();
+    @OneToMany(mappedBy = "ingredient")
     @JsonIgnore
-    private List<Order> orders = new ArrayList<>();
+    private List<OrderIngredient> orders = new ArrayList<>();
 
     public void setName(String newValue) {
         name = newValue;
@@ -54,11 +57,11 @@ public class Ingredient {
         return id;
     }
     
-    public void setOrders(List<Order> newValue) {
+    public void setOrders(List<OrderIngredient> newValue) {
     	this.orders = newValue;
     }
     
-    public List<Order> getOrders() {
+    public List<OrderIngredient> getOrders() {
     	return this.orders;
     }
 }

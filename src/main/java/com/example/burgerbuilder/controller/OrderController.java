@@ -1,5 +1,7 @@
 package com.example.burgerbuilder.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
@@ -7,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import com.example.burgerbuilder.model.Order;
+import com.example.burgerbuilder.model.OrderIngredient;
+import com.example.burgerbuilder.repository.OrderIngredientRepository;
 import com.example.burgerbuilder.repository.OrderRepository;
 import com.example.burgerbuilder.repository.UserRepository;
 import com.example.burgerbuilder.exception.ResourceNotFoundException;
@@ -20,10 +24,18 @@ public class OrderController {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private OrderIngredientRepository orderIngredientRepository;
 
 	@GetMapping("users/{userId}/orders")
 	public Page<Order> getAllOrdersByUser(@PathVariable(value = "userId") String userId, Pageable pageable) {
 		return orderRepository.findByUserId(userId, pageable);
+	};
+	
+	@GetMapping("users/{userId}/orders/{orderId}/ingredients")
+	public Page<OrderIngredient> getOrderById(@PathVariable(value = "orderId") Long orderId, Pageable pageable) {
+		return orderIngredientRepository.findAllByOrderId(orderId, pageable);
 	};
 
 	@PostMapping("users/{userId}/orders")
