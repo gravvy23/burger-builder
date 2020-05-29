@@ -42,7 +42,7 @@ public class OrderIngredient {
     
     @ManyToOne
     @JoinColumn(name = "ingredient_id")
-    Ingredient ingredient;
+    private Ingredient ingredient;
     
     public void setIngredient(Ingredient ingredient) {
     	this.ingredient = ingredient;
@@ -53,7 +53,7 @@ public class OrderIngredient {
     }
  
     @Column(columnDefinition = "position")
-    Integer position;
+    private Integer position;
     
     public void setPosition(Integer position) {
     	this.position = position;
@@ -61,5 +61,15 @@ public class OrderIngredient {
 
     public Integer getPosition() {
     	return this.position;
+    }
+
+    Long uid;
+    
+    public void setUid(Long uid) {
+        this.uid = uid;
+    }
+
+    public Long getUid() {
+        return this.uid;
     }
 }

@@ -1,7 +1,5 @@
 package com.example.burgerbuilder.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
@@ -9,7 +7,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import com.example.burgerbuilder.model.Order;
+import com.example.burgerbuilder.model.Ingredient;
 import com.example.burgerbuilder.model.OrderIngredient;
+import com.example.burgerbuilder.repository.IngredientRepository;
 import com.example.burgerbuilder.repository.OrderIngredientRepository;
 import com.example.burgerbuilder.repository.OrderRepository;
 import com.example.burgerbuilder.repository.UserRepository;
@@ -24,6 +24,9 @@ public class OrderController {
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private IngredientRepository ingredientRepository;
 	
 	@Autowired
 	private OrderIngredientRepository orderIngredientRepository;
@@ -40,10 +43,17 @@ public class OrderController {
 
 	@PostMapping("users/{userId}/orders")
     public Order createOrder(@PathVariable (value = "userId") String userId, @RequestBody Order order) {
-    	return userRepository.findById(userId).map(user -> {
-    		order.setUser(user);
+		Order resultOrder = userRepository.findById(userId).map(user -> {
+			order.setUser(user);
     		return orderRepository.save(order);
-    	}).orElseThrow(() -> new ResourceNotFoundException("UserId " + userId + " not found"));
+		}).orElseThrow(() -> new ResourceNotFoundException("UserId " + userId + " not found"));
+		order.getIngredients().forEach(ingredient -> {
+			Ingredient ing = ingredientRepository.findById(ingredient.getUid()).orElseThrow(() -> new ResourceNotFoundException("not such ingredient"));
+			ingredient.setIngredient(ing);
+			ingredient.setOrder(resultOrder);
+			orderIngredientRepository.save(ingredient);
+		});
+		return resultOrder;
     };
 
 	@PutMapping("users/{userId}/orders/{orderId}")

@@ -41,6 +41,7 @@ public class IngredientController {
 	@PutMapping("/ingredients/{id}")
 	public Ingredient updateIngredient(@PathVariable Long id, @RequestBody Ingredient ingredientRequest) {
 		return ingredientRepository.findById(id).map(ingredient -> {
+			ingredient.setDisplayname(ingredientRequest.getDisplayname());
 			ingredient.setName(ingredientRequest.getName());
 			ingredient.setPrice(ingredientRequest.getPrice());
 			return ingredientRepository.save(ingredient);

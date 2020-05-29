@@ -14,6 +14,9 @@ public class Ingredient {
     @Column(columnDefinition = "name")
     private String name;
 
+    @Column(columnDefinition = "displayname")
+    private String displayname;
+
     @Column(columnDefinition = "price")
     private Double price;
 
@@ -39,6 +42,14 @@ public class Ingredient {
 
     public String getName() {
         return name;
+    }
+
+    public void setDisplayname(String newValue) {
+        displayname = newValue;
+    }
+
+    public String getDisplayname() {
+        return displayname;
     }
 
     public void setPrice(Double newValue) {
