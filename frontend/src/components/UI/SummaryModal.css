@@ -1,0 +1,22 @@
+.ModalContent {
+    padding: 0 10px;
+}
+
+.ModalContentTitle {
+    text-align: center;
+}
+
+.ModalList {
+    background: none;
+}
+
+.ModalItem {
+    margin: 2px 0;
+    border-radius: 5px;
+}
+
+.ModalFooter {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+}

@@ -1,0 +1,23 @@
+.Auth {
+    margin: auto;
+    height: 100%;
+    width: 80%;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 10px;
+    padding-bottom: 20%;
+}
+
+.Auth form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Auth input {
+    text-align: left !important;
+    border: 1px #ccc solid !important;
+    box-shadow: 5px 5px 5px #bbb !important;
+}

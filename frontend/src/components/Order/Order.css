@@ -1,0 +1,34 @@
+.Order {
+    width: 80%;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    background: #fff;
+    padding: 10px;
+    margin: 10px auto;
+    box-sizing: border-box;
+}
+
+.OrderSpinner {
+    width: 40vw;
+    min-width: 100px;
+    height: 40vh;
+    min-height: 100px;
+    margin: auto;
+}
+
+.Orders {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.OrderTags {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.OrderTag {
+    padding: 5px 10px;
+    color: #000;
+}

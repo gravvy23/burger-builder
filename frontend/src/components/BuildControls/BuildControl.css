@@ -1,0 +1,23 @@
+.BuildControl {
+    width: 90%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 5px;
+    background: #D1C4E9;
+    border-radius: 8px;
+    box-shadow: 0 2px 1px #000;
+    margin: 5px;
+}
+
+.BuildControl .Text {
+    width: 80%;
+    border-radius: none;
+    box-shadow: none;
+    margin: 0;
+}
+
+.ControlLabel {
+    margin: 0;
+}

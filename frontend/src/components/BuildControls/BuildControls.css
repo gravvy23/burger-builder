@@ -1,0 +1,35 @@
+.BuildControls {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  margin: auto;
+  padding: 10px 0;
+}
+
+@media (min-width: 500px) and (min-height: 400px) {
+  .BuildControls {
+    flex-flow: row;
+    flex-wrap: wrap;
+  }
+
+  .BuildControls .BuildControl {
+    width: calc(50% - 10px);
+  }
+}
+
+.TotalPrice {
+    width: 100%;
+    margin: 0;
+    text-align: center;
+}
+
+.TotalPrice h2 {
+    margin: 0;
+}
+
+.OrderButton {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
