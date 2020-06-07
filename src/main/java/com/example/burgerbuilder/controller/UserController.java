@@ -10,6 +10,9 @@ import com.example.burgerbuilder.model.User;
 import com.example.burgerbuilder.repository.UserRepository;
 import com.example.burgerbuilder.exception.ResourceNotFoundException;
  
+/**
+ * User Controller
+ */
 @RestController
 @RequestMapping("/api")
 public class UserController {
@@ -22,17 +25,36 @@ public class UserController {
         return userRepository.findAll(pageable);
     }
      
+    /**
+     * GET api/users/{id}
+     * get one user
+     * @param id ID of the user
+     * @return
+     */
     @GetMapping("/users/{id}")
     public User getUserById(@PathVariable String id) {
         User entity = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Question not found with id " + id));;
         return entity;
     }
     
+    /**
+     * POST api/users
+     * create new user
+     * @param user user to be created
+     * @return
+     */
     @PostMapping("/users")
     public User addUser(@RequestBody User user) {
     	return userRepository.save(user);
     }
     
+    /**
+     * PUT api/users/{userId}
+     * update the user
+     * @param userId ID of the user to be updated
+     * @param userRequest updated user
+     * @return
+     */
     @PutMapping("/users/{userId}")
     public User updateUser(@PathVariable String userId,
                                    @RequestBody User userRequest) {
@@ -45,6 +67,12 @@ public class UserController {
                 }).orElseThrow(() -> new ResourceNotFoundException("Question not found with id " + userId));
     }
     
+    /**
+     * DELETE api/users/{userId}
+     * delete one user
+     * @param userId ID of the user to be deleted
+     * @return
+     */
     @DeleteMapping("/users/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable String userId) {
         return userRepository.findById(userId)

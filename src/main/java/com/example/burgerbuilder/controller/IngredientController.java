@@ -21,6 +21,9 @@ import com.example.burgerbuilder.model.Ingredient;
 import com.example.burgerbuilder.repository.IngredientRepository;
 import com.example.burgerbuilder.exception.ResourceNotFoundException;
 
+/**
+ * Ingredient Controller
+ */
 @RestController
 @RequestMapping("/api")
 public class IngredientController {
@@ -28,16 +31,35 @@ public class IngredientController {
 	@Autowired
 	private IngredientRepository ingredientRepository;
 
+	/**
+	 * GET /api/ingredients
+	 * get all ingredients
+	 * @param pageable
+	 * @return
+	 */
 	@GetMapping("/ingredients")
 	public Page<Ingredient> getIngredients(Pageable pageable) {
 		return ingredientRepository.findAll(pageable);
 	}
 
+	/**
+	 * POST api/ingredients
+	 * save new ingredient
+	 * @param ingredient new ingredient
+	 * @return
+	 */
 	@PostMapping("/ingredients")
 	public Ingredient createIngredient(@RequestBody Ingredient ingredient) {
 		return ingredientRepository.save(ingredient);
 	}
 
+	/**
+	 * PUT api/ingredients/{id}
+	 * update ingredient
+	 * @param id ID of the ingredient to be updated
+	 * @param ingredientRequest updated ingredient 
+	 * @return
+	 */
 	@PutMapping("/ingredients/{id}")
 	public Ingredient updateIngredient(@PathVariable Long id, @RequestBody Ingredient ingredientRequest) {
 		return ingredientRepository.findById(id).map(ingredient -> {
@@ -48,6 +70,12 @@ public class IngredientController {
 		}).orElseThrow(() -> new ResourceNotFoundException("Ingredient not found with id " + id));
 	}
 	
+	/**
+	 * DELETE api/ingredients/{id}
+	 * delete ingredient
+	 * @param id ID of the ingredient to be deleted
+	 * @return
+	 */
 	@DeleteMapping("ingredients/{id}")
 	public ResponseEntity<?> deleteIngredient(@PathVariable Long id) {
         return ingredientRepository.findById(id)
@@ -57,6 +85,12 @@ public class IngredientController {
                 }).orElseThrow(() -> new ResourceNotFoundException("Ingredient not found with id " + id));
     }
 
+	/**
+	 * GET api/ingredients/{id}
+	 * get one ingredient of the provided ID
+	 * @param id ID of the ingredient
+	 * @return
+	 */
 	@GetMapping("/ingredients/{id}")
 	public Ingredient updateQuestion(@PathVariable Long id) {
 		Ingredient entity = ingredientRepository.findById(id)

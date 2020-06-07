@@ -11,23 +11,17 @@ import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.sql.*;
 
+/**
+ * Burger Builder REST API
+ */
 @SpringBootApplication
 public class BurgerBuilderApplication {
 
+    /**
+     * Entry point of the application
+     * @param args
+     */
 	public static void main(String[] args) {
 		SpringApplication.run(BurgerBuilderApplication.class, args);
 	}
-	// @Autowired
-	// private DataSource dataSource;
-	
-	// public static void main(String[] args) throws Exception {
-    //     AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(BurgerBuilderApplication.class.getPackage().getName());
-    // }
-
-    // @PostConstruct
-    // public void myRealMainMethod() throws SQLException {
-    //     Statement stmt = dataSource.getConnection().createStatement();
-	//     stmt.executeUpdate("DROP TABLE IF EXISTS users");
-    //     stmt.executeUpdate("CREATE TABLE users ( id primary key, name varchar, surname varchar, mail varchar)");
-    // }
 }

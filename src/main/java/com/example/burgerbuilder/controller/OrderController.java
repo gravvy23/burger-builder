@@ -15,6 +15,9 @@ import com.example.burgerbuilder.repository.OrderRepository;
 import com.example.burgerbuilder.repository.UserRepository;
 import com.example.burgerbuilder.exception.ResourceNotFoundException;
 
+/**
+ * Order Controller
+ */
 @RestController
 @RequestMapping("/api")
 public class OrderController {
@@ -31,16 +34,37 @@ public class OrderController {
 	@Autowired
 	private OrderIngredientRepository orderIngredientRepository;
 
+	/**
+	 * GET /api/users/{userId}/orders
+	 * get all user orders
+	 * @param userId ID of the user
+	 * @param pageable
+	 * @return
+	 */
 	@GetMapping("users/{userId}/orders")
 	public Page<Order> getAllOrdersByUser(@PathVariable(value = "userId") String userId, Pageable pageable) {
 		return orderRepository.findByUserId(userId, pageable);
 	};
 	
+	/**
+	 * GET /api/users/{userId}/orders/{orderId}/ingredients
+	 * get ingredients of the specific order
+	 * @param orderId
+	 * @param pageable
+	 * @return
+	 */
 	@GetMapping("users/{userId}/orders/{orderId}/ingredients")
 	public Page<OrderIngredient> getOrderById(@PathVariable(value = "orderId") Long orderId, Pageable pageable) {
 		return orderIngredientRepository.findAllByOrderId(orderId, pageable);
 	};
 
+	/**
+	 * POST /api/users/{userId}/orders
+	 * create new order 
+	 * @param userId ID of the user who's the owner of order
+	 * @param order Order to be created
+	 * @return
+	 */
 	@PostMapping("users/{userId}/orders")
     public Order createOrder(@PathVariable (value = "userId") String userId, @RequestBody Order order) {
 		Order resultOrder = userRepository.findById(userId).map(user -> {
@@ -56,6 +80,14 @@ public class OrderController {
 		return resultOrder;
     };
 
+	/**
+	 * PUT api/users/{userId}/orders/{orderId}
+	 * update the order
+	 * @param userId ID of user who's the owner of the order
+	 * @param orderId ID of order to be updated
+	 * @param orderRequest updated order
+	 * @return
+	 */
 	@PutMapping("users/{userId}/orders/{orderId}")
     public Order updateOrder(@PathVariable (value = "userId") String userId,
     						 @PathVariable (value = "orderId") Long orderId,
@@ -70,6 +102,13 @@ public class OrderController {
         }).orElseThrow(() -> new ResourceNotFoundException("OrderId " + orderId + "not found"));
 	};
 	
+	/**
+	 * DELETE api/users/{userId}/orders/{orderId}
+	 * delete the order
+	 * @param userId ID of the user who's the owner of order
+	 * @param orderId ID of the order to be deleted
+	 * @return
+	 */
 	@DeleteMapping("users/{userId}/orders/{orderId}")
 	public ResponseEntity<?> deletePost(@PathVariable (value = "userId") String userId,
 			 							@PathVariable (value = "orderId") Long orderId) {

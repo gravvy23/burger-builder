@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.example.burgerbuilder.controller"},{"l":"com.example.burgerbuilder.exception"},{"l":"com.example.burgerbuilder.model"},{"l":"com.example.burgerbuilder.repository"}]
