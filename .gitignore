@@ -31,5 +31,5 @@ build/
 .vscode/
 /.metadata/
 
-
+.DS_Store
 frontend/node_modules
