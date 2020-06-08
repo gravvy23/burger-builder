@@ -1,3 +1,3 @@
 # burger-builder
 
-## https://damp-reef-88162.herokuapp.com/page/Burger
+## https://damp-reef-88162.herokuapp.com
